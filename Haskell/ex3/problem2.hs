@@ -1,4 +1,4 @@
-import Data.List (nub, sort)
+import Data.List (sort)
 
 type Graph = [[Int]]
 
@@ -6,7 +6,7 @@ reachableFrom :: Graph -> Int -> [Int]
 reachableFrom g m
   | not (isValidGraph g) = []
   | m < 1 || m > dim    = []
-  | otherwise            = sort (bfs [m] [])
+  | otherwise            = sort (bfs (neighbours m) [])
   where
     dim = length g
 
@@ -17,9 +17,7 @@ reachableFrom g m
 
     neighbours node = [n | (n, val) <- zip [1..] (g !! (node-1)), val == 1]
 
-    bfs []    visited = visited
+    bfs [] visited = visited
     bfs (x:queue) visited
       | x `elem` visited = bfs queue visited
-      | otherwise        = bfs (queue ++ newNeighbours) (visited ++ [x])
-      where
-        newNeighbours = filter (`notElem` visited) (neighbours x)
+      | otherwise        = bfs (queue ++ neighbours x) (visited ++ [x])
