@@ -5,4 +5,4 @@ isAntisym r = all check r
   where
     check (x, y) = if (y, x) `elem` r
                    then x == y
-                   else Truep3
+                   else True
