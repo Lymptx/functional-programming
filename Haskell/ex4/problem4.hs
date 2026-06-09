@@ -28,5 +28,3 @@ pathes g m n
     | otherwise = ManyWays
     where   
         count = countPathes g m n 0
-
---i would recommend not crossing this because my implementation is incomplete and difficult to understand
